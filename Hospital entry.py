@@ -1,41 +1,52 @@
-def Patient_entry(P_name, P_age, P_gender, P_condition, P_city, P_phone):
-    return P_name, P_age, P_gender, P_condition, P_city, P_phone
+from datetime import datetime
 
-for i in range(100):
+patient = []
+
+def add_patient():
+    print("\n'Indus Hospital'\n")
     Person_name = input("Enter patient's name: ")
     Person_age = input("Enter patient's age: ")
     Person_gender = input("Enter patient's gender: ")
     Person_condition = input("Enter patient's condition: ")
     Person_city = input("Enter patient's city: ")
     Person_phone = input("Enter patient's phone number: ")
-    
-    result_name, result_age, result_gender, result_condition, result_city, result_phone = Patient_entry(
-        P_name=Person_name, P_age=Person_age, P_gender=Person_gender,
-        P_condition=Person_condition, P_city=Person_city, P_phone=Person_phone)
-    
-    if result_name.isalpha():
-        if result_age.isdigit():
-            if result_gender.isalpha():
-                if result_condition.isalpha():
-                    if result_city.isalpha():
-                        if result_phone.isdigit():
-                            print("Patient Information:")
-                            print("Name =", result_name)
-                            print("Age =", result_age)
-                            print("Gender =", result_gender)
-                            print("Condition =", result_condition)
-                            print("City =", result_city)
-                            print("Phone =", result_phone)
-                            print("=" * 40)
-                        else:
-                            print("Invalid phone number.")
-                    else:
-                        print("City not recognized")
-                else:
-                    print("Condition not recognized")
-            else:
-                print("Gender not recognized")
-        else:
-            print("Age not recognized")
+
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+
+    complete = f"Name: {Person_name}\nAge: {Person_age}\nGender: {Person_gender}\nCondition: {Person_condition}\nCity: {Person_city}\nPhone: {Person_phone}\n"
+
+    if Person_name.isalpha() and Person_age.isdigit() and Person_gender.isalpha() and Person_condition.isalpha() and Person_city.isalpha() and Person_phone.isdigit():
+        print("Patient Information:")
+        print("Name =", Person_name)
+        print("Age =", Person_age)
+        print("Gender =", Person_gender)
+        print("Condition =", Person_condition)
+        print("City =", Person_city)
+        print("Phone =", Person_phone)
+        print("=" * 40)
+        patient.append(complete)
     else:
-        print("Name not recognized")
+        print("Invalid input. Please enter valid data.")
+
+def view_patient_data():
+    if len(patient) == 0:
+        print("No patient data available.")
+    else:
+        print("Patient Data:")
+        for i in patient:
+            print(i)
+
+while True:
+    print("\n'Indus Hospital'\n")
+    print("1: To add patient:")
+    print("2: View patient's Data:")
+
+    user_choice = input("\nEnter your choice: ")
+
+    if user_choice == "1":
+        add_patient()
+    elif user_choice == "2":
+        view_patient_data()
+    else:
+        print("Invalid choice. Please enter 1 or 2.")
