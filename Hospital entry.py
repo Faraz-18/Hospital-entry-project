@@ -1,41 +1,47 @@
 from datetime import datetime
 
-patient = []
+patients = []
 
 def add_patient():
     print("\n'Indus Hospital'\n")
-    Person_name = input("Enter patient's name: ")
-    Person_age = input("Enter patient's age: ")
-    Person_gender = input("Enter patient's gender: ")
-    Person_condition = input("Enter patient's condition: ")
-    Person_city = input("Enter patient's city: ")
-    Person_phone = input("Enter patient's phone number: ")
+    person_name = input("Enter patient's name: ")
+    person_age = input("Enter patient's age: ")
+    person_gender = input("Enter patient's gender: ")        
+    person_condition = input("Enter patient's condition: ")
+    person_city = input("Enter patient's city: ")
+    person_phone = input("Enter patient's phone number: ")
 
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
 
-    complete = f"Name: {Person_name}\nAge: {Person_age}\nGender: {Person_gender}\nCondition: {Person_condition}\nCity: {Person_city}\nPhone: {Person_phone}\n"
-
-    if Person_name.isalpha() and Person_age.isdigit() and Person_gender.isalpha() and Person_condition.isalpha() and Person_city.isalpha() and Person_phone.isdigit():
+    if person_name.isalpha() and person_age.isdigit() and person_gender.isalpha() and person_condition.isalpha() and person_city.isalpha() and person_phone.isdigit():
+        patient_info = {
+            "Name": person_name,
+            "Age": person_age,
+            "Gender": person_gender,
+            "Condition": person_condition,
+            "City": person_city,
+            "Phone": person_phone,
+            "Timestamp": current_time
+        }
         print("Patient Information:")
-        print("Name =", Person_name)
-        print("Age =", Person_age)
-        print("Gender =", Person_gender)
-        print("Condition =", Person_condition)
-        print("City =", Person_city)
-        print("Phone =", Person_phone)
+        for key, value in patient_info.items():
+            print(f"{key} =", value)
         print("=" * 40)
-        patient.append(complete)
+        patients.append(patient_info)
     else:
         print("Invalid input. Please enter valid data.")
 
 def view_patient_data():
-    if len(patient) == 0:
+    if len(patients) == 0:
         print("No patient data available.")
     else:
         print("Patient Data:")
-        for i in patient:
-            print(i)
+        for i, patient_info in enumerate(patients, start=1):
+            print(f"Patient {i}:")
+            for key, value in patient_info.items():
+                print(f"{key} =", value)
+            print("=" * 40)
 
 while True:
     print("\n'Indus Hospital'\n")
